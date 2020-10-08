@@ -48,12 +48,12 @@ class UpdateProfile {
         
 
         if (password && old_password) {
-            const checkkOldPassword = await this.hashProvider.compareHash(
+            const checkOldPassword = await this.hashProvider.compareHash(
                 old_password,
                 user.password,
             );
     
-            if (!checkkOldPassword) {
+            if (!checkOldPassword) {
                 throw new AppError('Old password does not match');
             }
 

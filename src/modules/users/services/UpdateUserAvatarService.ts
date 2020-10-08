@@ -1,15 +1,15 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
-import IUsersRepository from '../repositories/IUsersRepository';
 import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 import User from '../infra/typeorm/entities/User';
 
 
 interface IRequest {
     user_id: string;
-    avatarFilename: string
+    avatarFilename: string;
 }
 
 @injectable()
@@ -33,9 +33,9 @@ class UpdateUserAvatarService {
            await this.storageProvider.deleteFile(user.avatar);
         }
 
-        const filename = await this.storageProvider.saveFile(avatarFilename);
+        const fileName = await this.storageProvider.saveFile(avatarFilename);
 
-        user.avatar = filename;
+        user.avatar = fileName;
 
         await this.usersRepository.save(user);
 
